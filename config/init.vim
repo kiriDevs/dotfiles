@@ -17,6 +17,7 @@ set numberwidth=8 " Reserve at least 8 cols for linenumbers (last 1 is a space)
 
 " Set line endings to Unix-style (LF or `\n`)
 set ff=unix
+autocmd BufNewFile,BufRead * setlocal ff=unix
 
 set linebreak " Enable line wrapping at word ends
 set colorcolumn=80
