@@ -1,0 +1,2 @@
+# Setting prompt to PROMPTCOMPACT
+export PS1=$PROMPTCOMPACT

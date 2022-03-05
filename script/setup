@@ -1,0 +1,69 @@
+#!bash
+
+my_loc="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+df_home=$(dirname $my_loc)
+
+os_name="..."
+lx_cfghome=$XDG_CONFIG_HOME
+
+uname_output=$(uname)
+if [ $uname_output = "Linux" ]; then
+  echo " INFO: Detected Linux system"
+  os_name="linux"
+  if [ -z $XDG_CONFIG_HOME ]; then
+    lx_cfghome="~/.config"
+  fi
+elif [[ $uname_output == MINGW64_NT* ]]; then
+  echo " INFO: Detected MINGW64 system -> Win64"
+  os_name="win64"
+else
+  echo "ERROR: Unsupported OS!"
+  echo "       Exiting with error..."
+  exit 1
+fi
+
+cat snippet/kdfblockhead >> ~/.bashrc
+
+if [ $KDF_WORKSPACE_TYPE ]; then
+  if [ $KDF_WORKSPACE_TYPE = "ghcs" ]; then
+    echo ' INFO: $KDF_WORKSPACE_TYPE indicates GitHub Codespace'
+    if [ $KIRIDEVS_PAT ]; then
+      echo ' INFO: $KIRIDEVS_PAT exists | patch::bashrc[codespaceKiriPat]'
+      cat patch/bashrc-ghcsAuthentication.bash.kdfpatch >> ~/.bashrc
+    fi
+  fi
+fi
+
+if [ $PROMPT_COMPACT ]; then
+  echo ' INFO: Detected $PROMPT_COMPACT | patch::bashrc[prompt]'
+  cat patch/bashrc-promptcompactSupplied.bash.kdfpatch >> ~/.bashrc
+fi
+
+# Add extra stuff to bashrc
+echo " INFO: set::bashAliases"
+cat patch/bashrc-aliases.bash.kdfpatch >> ~/.bashrc
+
+# Set up files depending on availability of specific features
+if [ "$(where git 2> /dev/null)" ]; then
+  echo " INFO: Detected Git | script::setGitprefs"
+  sh script/setGitprefs.sh
+else
+  echo " WARN: Didn't detect Git - are you sure your \$PATH is ok?"
+fi
+
+if [ "$(where nvim 2> /dev/null)" ]; then
+  echo " INFO: Detected nvim | patch::bashrc[editor,visual] link::init.vim"
+  cat patch/bashrc-nvimAvailable.bash.kdfpatch >> ~/.bashrc
+
+  # Symlink the init.vim
+  if [ $os_name == "linux" ]; then
+    ln -s $df_home/config/init.vim $lx_cfghome/nvim/init.vim
+    echo "       $lx_cfghome/nvim/init.vim -> kdf::config/init.vim"
+  elif [ $os_name == "win64" ]; then
+    mkdir -p ~/AppData/Local/nvim
+    ln -sf $df_home/config/init.vim ~/AppData/Local/nvim/init.vim
+    echo "       ~/AppData/Local/nvim/init.vim -> kdf::config/init.vim"
+  fi
+fi
+
+cat snippet/kdfblockend >> ~/.bashrc
