@@ -6,6 +6,9 @@ df_home=$(dirname $my_loc)
 os_name="..."
 lx_cfghome=$XDG_CONFIG_HOME
 
+mkdir -p ./_out/
+mkdir -p ./_log/
+
 uname_output=$(uname)
 if [ $uname_output = "Linux" ]; then
   echo " INFO: Detected Linux system"
@@ -39,9 +42,10 @@ if [ $PROMPT_COMPACT ]; then
   cat patch/bashrc-promptcompactSupplied.bash.kdfpatch >> ~/.bashrc
 fi
 
-# Add extra stuff to bashrc
+# Add aliases to bashrc
 echo " INFO: set::bashAliases"
-cat patch/bashrc-aliases.bash.kdfpatch >> ~/.bashrc
+python script/generateBashAliases.py
+echo "source $df_home/_out/bashAliases" >> ~/.bashrc
 
 # Set up files depending on availability of specific features
 if [ "$(where git 2> /dev/null)" ]; then
