@@ -1,1 +1,8 @@
-export GITHUB_TOKEN=$KIRIDEVS_PAT
+
+# kiriDevs/dotfiles: Authenticating Codespaces Git requests using $KIRIDEVS_PAT
+if [ $KIRIDEVS_PAT ]; then
+  export GITHUB_TOKEN=$KIRIDEVS_PAT
+else
+  echo "[KDF]  WARN: Missing \$KIRIDEVS_PAT - not overwriting \$GITHUB_TOKEN"
+fi
+
