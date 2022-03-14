@@ -48,14 +48,14 @@ python script/generateBashAliases.py
 echo "source $df_home/_out/bashAliases" >> ~/.bashrc
 
 # Set up files depending on availability of specific features
-if [ "$(where git 2> /dev/null)" ]; then
+if [ "$(whereis git 2> /dev/null)" ]; then
   echo " INFO: Detected Git | script::setGitprefs"
   sh script/setGitprefs.sh
 else
   echo " WARN: Didn't detect Git - are you sure your \$PATH is ok?"
 fi
 
-if [ "$(where nvim 2> /dev/null)" ]; then
+if [ "$(whereis nvim 2> /dev/null)" ]; then
   echo " INFO: Detected nvim | patch::bashrc[editor,visual] link::init.vim"
   cat patch/bashrc-nvimAvailable.bash.kdfpatch >> ~/.bashrc
 
