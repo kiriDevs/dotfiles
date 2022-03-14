@@ -61,6 +61,7 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
 
   # Symlink the init.vim
   if [ $os_name == "linux" ]; then
+    mkdir -p ~/.config/nvim
     ln -s $df_home/config/init.vim $lx_cfghome/nvim/init.vim
     echo "       $lx_cfghome/nvim/init.vim -> kdf::config/init.vim"
   elif [ $os_name == "win64" ]; then
