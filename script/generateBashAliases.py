@@ -1,10 +1,6 @@
-from wtslog import Logger
-
 INPUT_PATH: str = "./assets/bashAliases"
 OUTPUT_PATH: str = "./_out/bashAliases"
 LOG_PATH: str = "./_log/generateBashAliases.py.log"
-
-outputLogger: Logger = Logger(LOG_PATH)
 
 bash_aliases: dict = {}
 bash_alias_lines: [str] = []
