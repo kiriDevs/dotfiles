@@ -68,6 +68,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " Themes
   Plug 'navarasu/onedark.nvim'
+  Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
   Plug 'drewtempelmeyer/palenight.vim'
 
   " GitSigns
@@ -216,6 +217,7 @@ endif
 
 "== Set the active color scheme! (Commented themes are installed but inactive)
 " colorscheme onedark
+" colorscheme embark
 colorscheme palenight
 
 " Map custom file extensions
