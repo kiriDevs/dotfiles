@@ -77,4 +77,7 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
   fi
 fi
 
+echo " INFO: Inject Update into bashrc | patch::bashrc[selfUpdate]"
+cat patch/bashrc-selfUpdate.bash.kdfpatch >> ~/.bashrc
+
 cat snippet/kdfblockend >> ~/.bashrc
