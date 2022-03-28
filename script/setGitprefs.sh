@@ -21,3 +21,6 @@ git config --global alias.lastae 'log --pretty="%ae" -n 1'
 
 git config --global alias.prettylog "log --oneline --graph"
 git config --global alias.plog "log --oneline --graph"
+
+git config --global alias.co "checkout"
+git config --global alias.cob "checkout -b"
