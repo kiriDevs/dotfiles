@@ -173,7 +173,7 @@ endfunction
 
 " Configure lightline
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
+      \ 'colorscheme': 'embark',
       \ 'active': {
         \ 'left': [
           \ ['mode', 'paste'],
@@ -218,8 +218,8 @@ endif
 
 "== Set the active color scheme! (Commented themes are installed but inactive)
 " colorscheme onedark
-" colorscheme embark
-colorscheme palenight
+colorscheme embark
+" colorscheme palenight
 " colorscheme srcery
 
 " Map custom file extensions
