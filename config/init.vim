@@ -218,8 +218,8 @@ endif
 
 "== Set the active color scheme! (Commented themes are installed but inactive)
 " colorscheme onedark
-colorscheme embark
 " colorscheme palenight
+colorscheme embark
 " colorscheme srcery
 
 " Map custom file extensions
