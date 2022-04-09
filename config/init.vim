@@ -70,6 +70,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'navarasu/onedark.nvim'
   Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
   Plug 'drewtempelmeyer/palenight.vim'
+  Plug 'srcery-colors/srcery-vim'
 
   " GitSigns
   Plug 'nvim-lua/plenary.nvim'
@@ -219,6 +220,7 @@ endif
 " colorscheme onedark
 " colorscheme embark
 colorscheme palenight
+" colorscheme srcery
 
 " Map custom file extensions
 autocmd BufNewFile,BufRead *.bash.kdfpatch :set filetype=bash
