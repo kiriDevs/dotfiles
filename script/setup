@@ -19,33 +19,53 @@ if [ $uname_output = "Linux" ]; then
 elif [[ $uname_output == MINGW64_NT* ]]; then
   echo " INFO: Detected MINGW64 system -> Win64"
   os_name="win64"
+elif [[ $uname_output == "Darwin" ]]; then
+  echo " INFO: Detected MacOS system"
+  os_name="macos"
 else
   echo "ERROR: Unsupported OS!"
   echo "       Exiting with error..."
   exit 1
 fi
 
-cat snippet/kdfblockhead >> ~/.bashrc
+if [ $os_name == "macos" ]; then
+  cat snippet/kdfblockhead >> ~/.zshrc
+else
+  cat snippet/kdfblockhead >> ~/.bashrc
+fi
 
 if [ $KDF_WORKSPACE_TYPE ]; then
   if [ $KDF_WORKSPACE_TYPE = "ghcs" ]; then
     echo ' INFO: $KDF_WORKSPACE_TYPE indicates GitHub Codespace'
     if [ $KIRIDEVS_PAT ]; then
       echo ' INFO: $KIRIDEVS_PAT exists | patch::bashrc[codespaceKiriPat]'
-      cat patch/bashrc-ghcsAuthentication.bash.kdfpatch >> ~/.bashrc
+      if [ $os_name == "macos" ]; then
+        cat patch/bashrc-ghcsAuthentication.bash.kdfpatch >> ~/.zshrc
+      else
+        cat patch/bashrc-ghcsAuthentication.bash.kdfpatch >> ~/.bashrc
+      fi
     fi
   fi
 fi
 
 if [ $PROMPT_COMPACT ]; then
   echo ' INFO: Detected $PROMPT_COMPACT | patch::bashrc[prompt]'
-  cat patch/bashrc-promptcompactSupplied.bash.kdfpatch >> ~/.bashrc
+  if [ $os_name == "macos" ]; then
+    cat patch/bashrc-promptcompactSupplied.bash.kdfpatch >> ~/.zshrc
+  else
+    cat patch/bashrc-promptcompactSupplied.bash.kdfpatch >> ~/.bashrc
+  fi
 fi
 
 # Add aliases to bashrc
 echo " INFO: set::bashAliases"
-python script/generateBashAliases.py
-echo "source $df_home/_out/bashAliases" >> ~/.bashrc
+if [ $os_name == "macos" ]; then
+  echo "source $df_home/_out/bashAliases" >> ~/.zshrc
+  python3 script/generateBashAliases.py
+else
+  echo "source $df_home/_out/bashAliases" >> ~/.bashrc
+  python script/generateBashAliases.py
+fi
 
 # Set up files depending on availability of specific features
 if [ "$(whereis git 2> /dev/null)" ]; then
@@ -57,7 +77,11 @@ fi
 
 if [ "$(whereis nvim 2> /dev/null)" ]; then
   echo " INFO: Detected nvim | patch::bashrc[editor,visual] link::init.vim"
-  cat patch/bashrc-nvimAvailable.bash.kdfpatch >> ~/.bashrc
+  if [ $os_name == "macos" ]; then
+    cat patch/bashrc-nvimAvailable.bash.kdfpatch >> ~/.zshrc
+  else
+    cat patch/bashrc-nvimAvailable.bash.kdfpatch >> ~/.bashrc
+  fi
 
   # Symlink the init.vim
   if [ $os_name == "linux" ]; then
@@ -70,6 +94,9 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
       mkdir -p ~/AppData/Local/nvim
       powershell -Command "New-Item -ItemType SymbolicLink -Path ~\AppData\Local\nvim -Name init.vim -Value .\config\init.vim"
       echo "       ~/AppData/Local/nvim/init.vim -> kdf::config/init.vim"
+    elif [ $os_name == "macos" ]; then
+      ln -s $df_home/config/init.vim ~/.config/nvim/init.vim
+      echo "       .config/nvim/init.vim -> kdf::config/init.vim"
     else
       echo "ERROR: Missing Administrator privileges!"
       exit 1
@@ -77,7 +104,17 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
   fi
 fi
 
-echo " INFO: Inject Update into bashrc | patch::bashrc[selfUpdate]"
-cat patch/bashrc-selfUpdate.bash.kdfpatch >> ~/.bashrc
+if [ $os_name == "macos" ]; then
+  # The default shell on macOS is zsh
+  echo " INFO: Inject Update into zshrc | patch::bashrc[selfUpdate]"
+  cat patch/bashrc-selfUpdate.bash.kdfpatch >> ~/.zshrc
+else
+  echo " INFO: Inject Update into bashrc | patch::bashrc[selfUpdate]"
+  cat patch/bashrc-selfUpdate.bash.kdfpatch >> ~/.bashrc
+fi
 
-cat snippet/kdfblockend >> ~/.bashrc
+if [ $os_name == "macos" ]; then
+  cat snippet/kdfblockend >> ~/.zshrc
+else
+  cat snippet/kdfblockend >> ~/.bashrc
+fi
