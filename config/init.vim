@@ -26,8 +26,6 @@ set cursorline
 " Set a backup statusline
 set statusline=%f%r%m%h%=Line\ %l/%L\ \|\ Column\ %c\ \|\ (%P)
 
-set shell=gitbash
-
 
 """"""""""""""""""""
 " Set key mappings "
@@ -96,7 +94,7 @@ call plug#end()
 " Plugin configuration (except Lightline)
 lua <<EOF
 require("nvim-treesitter.configs").setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = { enable = true }
 }
 require("nvim-treesitter.install").compilers = { "clang" }
