@@ -113,6 +113,13 @@ else
   cat patch/bashrc-selfUpdate.bash.kdfpatch >> ~/.bashrc
 fi
 
+echo "patch::bashrc[dfExport]"
+if [ $os_name == "macos" ]; then
+  echo "export DF=$df_home" >> ~/.zshrc
+else
+  echo "export DF=$df_home" >> ~/.bashrc
+fi
+
 if [ $os_name == "macos" ]; then
   cat snippet/kdfblockend >> ~/.zshrc
 else
