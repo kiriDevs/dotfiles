@@ -68,7 +68,13 @@ else
 fi
 
 # Set up files depending on availability of specific features
-if [ "$(whereis git 2> /dev/null)" ]; then
+if [ $os_name == "win64" ]; then
+  findgitcmd="where git"
+else
+  findgitcmd="whereis git"
+fi
+
+if [ "$(eval $findgitcmd 2> /dev/null)" ]; then
   echo " INFO: Detected Git | script::setGitprefs"
   sh script/setGitprefs.sh
 else
