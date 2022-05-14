@@ -70,6 +70,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'srcery-colors/srcery-vim'
   Plug 'phanviet/vim-monokai-pro'
+  Plug 'pineapplegiant/spaceduck'
+  Plug 'Rigellute/shades-of-purple.vim'
 
   " GitSigns
   Plug 'nvim-lua/plenary.nvim'
@@ -221,6 +223,8 @@ endif
 colorscheme embark
 " colorscheme srcery
 " colorscheme monokai_pro
+" colorscheme spaceduck
+" colorscheme shades_of_purple
 
 " Map custom file extensions
 autocmd BufNewFile,BufRead *.bash.kdfpatch :set filetype=bash
