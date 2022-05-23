@@ -1,2 +1,0 @@
-echo "Updating dotfiles..."
-git -C ~/dotfiles pull
