@@ -59,7 +59,10 @@ fi
 
 # Add aliases to bashrc
 echo " INFO: set::bashAliases"
-if [ $os_name == "macos" ]; then
+if [ $os_name == "linux" ]; then
+  echo "source $df_home/_out/bashAliases" >> ~/.bashrc
+  python3 script/generateBashAliases.py
+elif [ $os_name == "macos" ]; then
   echo "source $df_home/_out/bashAliases" >> ~/.zshrc
   python3 script/generateBashAliases.py
 else
