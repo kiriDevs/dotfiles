@@ -95,7 +95,7 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
   # Symlink the init.vim
   if [ $os_name == "linux" ]; then
     mkdir -p ~/.config/nvim
-    ln -s $df_home/config/init.vim $lx_cfghome/nvim/init.vim
+    ln -sT $df_home/config/init.vim $lx_cfghome/nvim/init.vim
     echo "       $lx_cfghome/nvim/init.vim -> kdf::config/init.vim"
   elif [ $os_name == "win64" ]; then
     # Check for Administrator privileges
@@ -104,7 +104,7 @@ if [ "$(whereis nvim 2> /dev/null)" ]; then
       powershell -Command "New-Item -ItemType SymbolicLink -Path ~\AppData\Local\nvim -Name init.vim -Value .\config\init.vim"
       echo "       ~/AppData/Local/nvim/init.vim -> kdf::config/init.vim"
     elif [ $os_name == "macos" ]; then
-      ln -s $df_home/config/init.vim ~/.config/nvim/init.vim
+      ln -sT $df_home/config/init.vim ~/.config/nvim/init.vim
       echo "       .config/nvim/init.vim -> kdf::config/init.vim"
     else
       echo "ERROR: Missing Administrator privileges!"
