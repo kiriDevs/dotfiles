@@ -14,7 +14,7 @@ if [ $uname_output = "Linux" ]; then
   echo " INFO: Detected Linux system"
   os_name="linux"
   if [ -z $XDG_CONFIG_HOME ]; then
-    lx_cfghome="~/.config"
+    lx_cfghome=~/.config
   fi
 elif [[ $uname_output == MINGW64_NT* ]]; then
   echo " INFO: Detected MINGW64 system -> Win64"
