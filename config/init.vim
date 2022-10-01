@@ -49,7 +49,6 @@ tnoremap <Esc> <C-\><C-n>
 tnoremap <C-^> <Esc>
 
 
-
 """""""""""""""""
 " Setup plugins "
 """""""""""""""""
@@ -72,6 +71,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'phanviet/vim-monokai-pro'
   Plug 'pineapplegiant/spaceduck'
   Plug 'Rigellute/shades-of-purple.vim'
+  Plug 'wadackel/vim-dogrun'
 
   " GitSigns
   Plug 'nvim-lua/plenary.nvim'
@@ -166,8 +166,8 @@ function! GetReadOnlyIcon()
 endfunction
 
 function GetGpsLocation()
-  if luaeval("require'nvim-gps'.is_available()")
-    return luaeval("require'nvim-gps'.get_location()")
+  if luaeval("require('nvim-gps').is_available()")
+    return luaeval("require('nvim-gps').get_location()")
   endif
   return ""
 endfunction
@@ -219,8 +219,8 @@ endif
 
 "== Set the active color scheme! (Commented themes are installed but inactive)
 " colorscheme onedark
-" colorscheme palenight
-colorscheme embark
+colorscheme palenight
+" colorscheme embark
 " colorscheme srcery
 " colorscheme monokai_pro
 " colorscheme spaceduck
