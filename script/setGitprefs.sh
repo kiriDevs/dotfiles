@@ -4,6 +4,7 @@ git config --global user.email "56218513+kiriDevs@users.noreply.github.com"
 git config --global pull.ff only
 git config --global commit.gpgsign true
 
+git config --global alias.ls "status --verbose --untracked-files=all"
 git config --global alias.s "status"
 
 git config --global alias.c "commit"
