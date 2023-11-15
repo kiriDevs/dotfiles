@@ -20,6 +20,7 @@ git config --global alias.cam "commit -a -m"
 git config --global alias.lastc "log --oneline --graph -n 1"
 git config --global alias.lastce 'log --pretty="%ce" -n 1'
 git config --global alias.lastae 'log --pretty="%ae" -n 1'
+git config --global alias.lastcn 'log --pretty="%cn" -n 1'
 
 git config --global alias.prettylog "log --oneline --graph"
 git config --global alias.plog "log --oneline --graph"
