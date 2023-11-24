@@ -15,7 +15,7 @@ git config --global alias.unadd "restore --cached"
 git config --global alias.aa "add ."
 git config --global alias.ca "commit -a"
 git config --global alias.cm "commit -m"
-git config --global alias.cam "commit -a -m"
+git config --global alias.cam "commit -am"
 
 git config --global alias.lastc "log --oneline --graph -n 1"
 git config --global alias.lastce 'log --pretty="%ce" -n 1'
