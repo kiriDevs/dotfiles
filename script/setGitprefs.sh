@@ -1,5 +1,5 @@
 #!/bin/bash
-git config --global user.name "Kiron"
+git config --global user.name "Kiri"
 git config --global user.email "56218513+kiriDevs@users.noreply.github.com"
 git config --global pull.ff only
 git config --global commit.gpgsign true
